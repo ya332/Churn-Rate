@@ -26,7 +26,7 @@ X = dataset.iloc[:, 3:13].values
 y = dataset.iloc[:, 13].values
 #Printing out the values of X --> Which contains the features
 #                           y --> Which contains the target variable
-print(X)
+print(len(X[1,:]))
 print(y)
 
 # Encoding categorical data
@@ -51,6 +51,7 @@ from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
+print(len(X_train[1,:]))
 
 
 
@@ -161,4 +162,26 @@ print("Accuracy Score: ", acc_score)
 print("Area Under Curve: ", area_under_curve)
 print("Classification Report:\n", cr)
 print("Confusion Matrix:\n", cm)
-print(X_test)
+
+
+# Part 4: Use the trained model to make predictions
+import tensorflow as tf
+column_names = ["RowNumber", "CustomerId", "CompanyName", "TQMScore", "Geography", "ProductType", "TotalCustomerYears", "Tenure", "RevenueInMillions", "NumOfProducts", "RenewedBefore", "IsActiveMember", "MaxAttentionContractCost", "Exited"]
+class_names = ["Not exited","Exited"]
+test_case = np.array([[10], [15627888], ["Apple"], [580], ["EMEA"], ["Onprem"], [29], [9], [61710.44], [2], [1], [0], [128077.8], [0]])
+predict_dataset = np.ndarray(shape=(1,14), buffer=test_case)
+X = predict_dataset[:, 3:13]
+
+#We store the Dependent value/predicted value in y by storing the 13th index in the variable y
+y = predict_dataset[:, 13]
+
+labelencoder_X_1 = LabelEncoder()#creating label encoder object no. 1 to encode region name(index 1 in features)
+X[:, 1] = labelencoder_X_1.fit_transform(X[:, 1])#encoding region from string to just 3 no.s 0,1,2 respectively
+labelencoder_X_2 = LabelEncoder()#creating label encoder object no. 2 to encode Gender name(index 2 in features)
+X[:, 2] = labelencoder_X_2.fit_transform(X[:, 2])#encoding Gender from string to just 2 no.s 0,1(male,female) respectively
+#Now creating Dummy variables
+onehotencoder = OneHotEncoder(categorical_features = [1])
+X = onehotencoder.fit_transform(X).toarray()
+# X = X[:, 1:]
+predictions = model.predict(X)
+print("Exit probability: ", predictions)
