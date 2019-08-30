@@ -126,6 +126,10 @@ except:
     # Fitting the ANN to the Training set
     model.fit(X_train, y_train, batch_size = 10, nb_epoch = 100)
 
+    # serialize model to JSON
+    model_json = model.to_json()
+    with open("model.json", "w") as json_file:
+        json_file.write(model_json)
 
     # Save the model by serializing weights to HDF5
     model.save_weights("model.h5")
@@ -144,6 +148,7 @@ except:
 # Evaluting the model with different metrics
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
+from sklear.metrics import auc
 from sklearn.metrics import classification_report
 
 acc_score = accuracy_score(y_test, y_pred)
