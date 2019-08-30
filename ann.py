@@ -148,7 +148,7 @@ except:
 # Evaluting the model with different metrics
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
-from sklear.metrics import auc
+from sklearn.metrics import auc
 from sklearn.metrics import classification_report
 
 acc_score = accuracy_score(y_test, y_pred)
