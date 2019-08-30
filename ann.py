@@ -75,7 +75,7 @@ Or: Repeat Steps 1 to 5 but update the weights only after a batch of observation
 import keras
 from keras.models import Sequential#For building the Neural Network layer by layer
 from keras.layers import Dense#To randomly initialize the weights to small numbers close to 0(But not 0)
-
+from keras.models import model_from_json
 # Try to load the model
 try:
     # load json and create model
@@ -91,12 +91,11 @@ try:
     # evaluate loaded model on test data
     model.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
     score = model.evaluate(X_train, y_train, verbose=0)
-    print("%s: %.2f%%" % (model.metrics_names[1], score[1]*100))
+    y_pred = model.predict(X_test)
+    y_pred = (y_pred > 0.5)#if y_pred is larger than 0.5 it returns true(1) else false(2)
+    
 except:
-        
-
-
-
+    print("Saved model not found")
     # Initialising the ANN
     #So there are actually 2 ways of initializing a deep learning model
     #------1)Defining each layer one by one
@@ -124,7 +123,7 @@ except:
     model.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
 
     # Fitting the ANN to the Training set
-    model.fit(X_train, y_train, batch_size = 10, nb_epoch = 100)
+    model.fit(X_train, y_train, batch_size = 10, epochs = 100)
 
     # serialize model to JSON
     model_json = model.to_json()
@@ -140,7 +139,7 @@ except:
     # Predicting the Test set results
     y_pred = model.predict(X_test)
     y_pred = (y_pred > 0.5)#if y_pred is larger than 0.5 it returns true(1) else false(2)
-    print(y_pred)
+    # print(y_pred)
 
 
 
@@ -150,12 +149,15 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import auc
 from sklearn.metrics import classification_report
+from sklearn.metrics import roc_curve
 
+# print(X_train.shape, X_test.shape, y_pred.shape, y_train.shape, y_test.shape)
 acc_score = accuracy_score(y_test, y_pred)
-area_under_curve = auc(X, y)
+fpr, tpr, thresholds = roc_curve(y_test, y_pred) 
+area_under_curve = auc(fpr, tpr)
 cr = classification_report(y_test, y_pred)
 cm = confusion_matrix(y_test, y_pred)
 print("Accuracy Score: ", acc_score)
 print("Area Under Curve: ", area_under_curve)
-print("Classification Report: ", cr)
-print("Confusion Matrix: ", cm)
+print("Classification Report:\n", cr)
+print("Confusion Matrix:\n", cm)
