@@ -17,7 +17,7 @@ import pandas as pd
 np.random.seed(0)
 
 # Importing the dataset save it in Pycharm Projects/Name of Project
-dataset = pd.read_csv('Churn_Modelling.csv')
+dataset = pd.read_csv('ChurnModel.csv')
 
 #Looking at the features we can see that row no.,name will have no relation with a customer with leaving the bank
 #so we drop them from X which contains the features Indexes from 3 to 12
@@ -161,3 +161,4 @@ print("Accuracy Score: ", acc_score)
 print("Area Under Curve: ", area_under_curve)
 print("Classification Report:\n", cr)
 print("Confusion Matrix:\n", cm)
+print(X_test)
