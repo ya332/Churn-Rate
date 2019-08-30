@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # fix random seed for reproducibility
-numpy.random.seed(0)
+np.random.seed(0)
 
 # Importing the dataset save it in Pycharm Projects/Name of Project
 dataset = pd.read_csv('Churn_Modelling.csv')
