@@ -26,8 +26,6 @@ X = dataset.iloc[:, 3:13].values
 y = dataset.iloc[:, 13].values
 #Printing out the values of X --> Which contains the features
 #                           y --> Which contains the target variable
-print(len(X[1,:]))
-print(y)
 
 # Encoding categorical data
 # Now we encode the string values in the features to numerical values
@@ -51,7 +49,6 @@ from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
-print(len(X_train[1,:]))
 
 
 
@@ -96,7 +93,7 @@ try:
     y_pred = (y_pred > 0.5)#if y_pred is larger than 0.5 it returns true(1) else false(2)
     
 except:
-    print("Saved model not found")
+    print("Saved model not found\nTraining begins.")
     # Initialising the ANN
     #So there are actually 2 ways of initializing a deep learning model
     #------1)Defining each layer one by one
@@ -158,19 +155,24 @@ fpr, tpr, thresholds = roc_curve(y_test, y_pred)
 area_under_curve = auc(fpr, tpr)
 cr = classification_report(y_test, y_pred)
 cm = confusion_matrix(y_test, y_pred)
+print("#"*30)
+print("Model Metrics")
 print("Accuracy Score: ", acc_score)
 print("Area Under Curve: ", area_under_curve)
 print("Classification Report:\n", cr)
 print("Confusion Matrix:\n", cm)
+print("#"*30)
 
 
-# Part 4: Use the trained model to make predictions
+# Part 4: Use the trained model to make predictions for individual test cases
+print("Individual test case detected")
+print("Load model to test the instance...")
 import tensorflow as tf
 column_names = ["RowNumber", "CustomerId", "CompanyName", "TQMScore", "Geography", "ProductType", "TotalCustomerYears", "Tenure", "RevenueInMillions", "NumOfProducts", "RenewedBefore", "IsActiveMember", "MaxAttentionContractCost", "Exited"]
 class_names = ["Not exited","Exited"]
 test_case = np.array([[10], [15627888], ["Apple"], [580], ["EMEA"], ["Onprem"], [29], [9], [61710.44], [2], [1], [0], [128077.8], [0]])
 predict_dataset = np.ndarray(shape=(1,14), buffer=test_case)
-X = predict_dataset[:, 3:13]
+X = predict_dataset[:, 2:13]
 
 #We store the Dependent value/predicted value in y by storing the 13th index in the variable y
 y = predict_dataset[:, 13]
@@ -185,3 +187,4 @@ X = onehotencoder.fit_transform(X).toarray()
 # X = X[:, 1:]
 predictions = model.predict(X)
 print("Exit probability: ", predictions)
+print("Test finished")
