@@ -168,7 +168,7 @@ print("#"*30)
 print("Individual test case detected")
 print("Load model to test the instance...")
 import tensorflow as tf
-column_names = ["RowNumber", "CustomerId", "CompanyName", "TQMScore", "Geography", "ProductType", "TotalCustomerYears", "Tenure", "RevenueInMillions", "NumOfProducts", "RenewedBefore", "IsActiveMember", "MaxAttentionContractCost", "Exited"]
+column_names = ["RowNumber", "CustomerId", "CompanyName", "TQMScore", "Geography", "ProductType", "TotalCustomerYears", "Tenure", "RevenueInMillions", "NumOfProducts", "RenewedBefore", "IsActiveMember", "MaxAttentionContractCostInMillions", "Will Exit?"]
 class_names = ["Not exited","Exited"]
 test_case = np.array([[10], [15627888], ["Apple"], [580], ["EMEA"], ["Onprem"], [29], [9], [61710.44], [2], [1], [0], [128077.8], [0]])
 predict_dataset = np.ndarray(shape=(1,14), buffer=test_case)
@@ -186,5 +186,12 @@ onehotencoder = OneHotEncoder(categorical_features = [1])
 X = onehotencoder.fit_transform(X).toarray()
 # X = X[:, 1:]
 predictions = model.predict(X)
-print("Exit probability: ", predictions)
+print("#"*30)
+print("Test starts...")
+for k,v in zip(column_names,test_case):
+    print("{}: {}".format(k,v[0]))
+print("Exit probability according to the model: {:.5f}%".format(predictions[0][0]*100))
+
+# print("Testing company: {}. \n Renewed contract before?: {}\n, Total years as customers: {}\n, Max Attention Contract Cost: {}, \nExit probability: {:.4f}%.".format(test_case[2][0],test_case[2][10],test_case[2][0],test_case[2][0],predictions[0][0]*100))
 print("Test finished")
+print("#"*30)
