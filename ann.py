@@ -168,7 +168,7 @@ print("#"*30)
 print("Individual test case detected")
 print("Load model to test the instance...")
 import tensorflow as tf
-column_names = ["RowNumber", "CustomerId", "CompanyName", "TQMScore", "Geography", "ProductType", "TotalCustomerYears", "Tenure", "RevenueInMillions", "NumOfProducts", "RenewedBefore", "IsActiveMember", "MaxAttentionContractCostInMillions", "Will Exit?"]
+column_names = ["RowNumber", "CustomerId", "CompanyName", "TQMScore", "Geography", "ProductType", "TotalCustomerYears", "ContractDurationInMonths", "RevenueInMillions", "NumOfProducts", "RenewedBefore", "IsActiveMember", "MaxAttentionContractCostInMillions", "Will Exit?"]
 class_names = ["Not exited","Exited"]
 test_case = np.array([[10], [15627888], ["Apple"], [580], ["EMEA"], ["Onprem"], [29], [9], [61710.44], [2], [1], [0], [128077.8], [0]])
 predict_dataset = np.ndarray(shape=(1,14), buffer=test_case)
