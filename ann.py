@@ -193,7 +193,7 @@ X = onehotencoder.fit_transform(X).toarray()
 # X = X[:, 1:]
 predictions = model.predict(X)
 print("#"*30)
-print("Test starts...")
+print("A single test instance found.\nTest starts...")
 for k,v in zip(column_names,test_case):
     print("{}: {}".format(k,v[0]))
 print("Exit probability according to the model: {:.5f}%".format(predictions[0][0]*100))
