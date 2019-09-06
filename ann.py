@@ -16,8 +16,12 @@ import pandas as pd
 # fix random seed for reproducibility
 np.random.seed(0)
 
+# Inform the user
+print("Looking for dataset.")
 # Importing the dataset save it in Pycharm Projects/Name of Project
+print("Dataset is being read.")
 dataset = pd.read_csv('ChurnModel.csv')
+print("Preprocessing started")
 
 #Looking at the features we can see that row no.,name will have no relation with a customer with leaving the bank
 #so we drop them from X which contains the features Indexes from 3 to 12
@@ -50,7 +54,7 @@ sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
-
+print("Preprocessing is over")
 
 
 # Part 2 - Now let's make the ANN!
@@ -130,7 +134,7 @@ except:
 
     # Save the model by serializing weights to HDF5
     model.save_weights("model.h5")
-    print("Saved model to disk")
+    print("Training is over.\nSaved model to disk")
 
 
     # Part 3 - Making the predictions and evaluating the model
@@ -140,7 +144,7 @@ except:
     # print(y_pred)
 
 
-
+print("Start evalution of the model")
 
 # Evaluting the model with different metrics
 from sklearn.metrics import confusion_matrix
@@ -155,6 +159,8 @@ fpr, tpr, thresholds = roc_curve(y_test, y_pred)
 area_under_curve = auc(fpr, tpr)
 cr = classification_report(y_test, y_pred)
 cm = confusion_matrix(y_test, y_pred)
+
+print("Evaluation is over.")
 print("#"*30)
 print("Model Metrics")
 print("Accuracy Score: ", acc_score)
