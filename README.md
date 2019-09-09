@@ -2,7 +2,7 @@
 - First, download Python from here: https://www.python.org/downloads/windows/  
 - Then, download get-pip.py from https://bootstrap.pypa.io/ \
 `$cd /path/to/downloadsfolder` \
-`python get-pip.py` 
+`$python get-pip.py` 
 - Install Git from here: https://gitforwindows.org/ 
 - Install requirements \
 `$pip install -rU requirements.txt` 
