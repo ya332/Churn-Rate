@@ -17,11 +17,12 @@ import pandas as pd
 np.random.seed(0)
 
 # Inform the user
-print("Looking for dataset.")
+print("Looking for dataset...")
 # Importing the dataset save it in Pycharm Projects/Name of Project
-print("Dataset is being read.")
 dataset = pd.read_csv('ChurnModel.csv')
-print("Preprocessing started")
+print("Dataset is found...")
+print("Dataset is being read.")
+print("Preprocessing started...")
 
 #Looking at the features we can see that row no.,name will have no relation with a customer with leaving the bank
 #so we drop them from X which contains the features Indexes from 3 to 12
@@ -196,7 +197,8 @@ print("#"*30)
 print("A single test instance found.\nTest starts...")
 for k,v in zip(column_names,test_case):
     print("{}: {}".format(k,v[0]))
-print("Exit probability according to the model: {:.5f}%".format(predictions[0][0]*100))
+print("Probability of leaving SAP: {:.5f}%".format(predictions[0][0]*100))
+print("Probability of staying with SAP: {:.5f}%".format(100-predictions[0][0]*100))
 
 # print("Testing company: {}. \n Renewed contract before?: {}\n, Total years as customers: {}\n, Max Attention Contract Cost: {}, \nExit probability: {:.4f}%.".format(test_case[2][0],test_case[2][10],test_case[2][0],test_case[2][0],predictions[0][0]*100))
 print("Test finished")
