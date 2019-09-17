@@ -134,7 +134,7 @@ except:
         json_file.write(model_json)
 
     # Save the model by serializing weights to HDF5
-    model.save_weights("model.h5")
+    model.save("model.h5")
     print("Training is over.\nSaved model to disk")
 
 
