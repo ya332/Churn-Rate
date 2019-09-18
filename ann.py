@@ -141,6 +141,7 @@ except:
     # Part 3 - Making the predictions and evaluating the model
     # Predicting the Test set results
     y_pred = model.predict(X_test)
+    print(y_pred)
     y_pred = (y_pred > 0.5)#if y_pred is larger than 0.5 it returns true(1) else false(2)
     # print(y_pred)
 
@@ -193,6 +194,7 @@ onehotencoder = OneHotEncoder(categorical_features = [1])
 X = onehotencoder.fit_transform(X).toarray()
 # X = X[:, 1:]
 predictions = model.predict(X)
+print(predictions)
 print("#"*30)
 print("A single test instance found.\nTest starts...")
 for k,v in zip(column_names,test_case):
