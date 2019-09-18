@@ -7,4 +7,3 @@
 - model.json
 - model.h5
 - group1-shard1of1.bin
-
