@@ -1,5 +1,5 @@
 #So in this dataset we would be dealing with Churn Modeling i.e. we would be writing a Artificial Neural Network
-#to find out reasons as to why and which customers are actually leaving the bank and their dependencies on one another.
+#to find out reasons as to why and which customers are actually leaving SAP and their dependencies on one another.
 #This is a classification problem 0-1 classification(1 if Leaves 0 if customer stays)
 #We might use Theano or Tensorflow but the thing is that these libraries require us to write most of the Ml code from
 #scratch so instead we make use of Keras which enables us writing powerful Neural Networks with a few lines of code
@@ -24,7 +24,7 @@ print("Dataset is found...")
 print("Dataset is being read.")
 print("Preprocessing started...")
 
-#Looking at the features we can see that row no.,name will have no relation with a customer with leaving the bank
+#Looking at the features we can see that row no.,name will have no relation with a customer with leaving SAP
 #so we drop them from X which contains the features Indexes from 3 to 12
 X = dataset.iloc[:, 3:13].values
 #We store the Dependent value/predicted value in y by storing the 13th index in the variable y
@@ -34,12 +34,12 @@ y = dataset.iloc[:, 13].values
 
 # Encoding categorical data
 # Now we encode the string values in the features to numerical values
-# The only 2 values are Gender and Region which need to converted into numerical data
+# The only 2 values are Product Type and Region which need to converted into numerical data
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 labelencoder_X_1 = LabelEncoder()#creating label encoder object no. 1 to encode region name(index 1 in features)
 X[:, 1] = labelencoder_X_1.fit_transform(X[:, 1])#encoding region from string to just 3 no.s 0,1,2 respectively
-labelencoder_X_2 = LabelEncoder()#creating label encoder object no. 2 to encode Gender name(index 2 in features)
-X[:, 2] = labelencoder_X_2.fit_transform(X[:, 2])#encoding Gender from string to just 2 no.s 0,1(male,female) respectively
+labelencoder_X_2 = LabelEncoder()#creating label encoder object no. 2 to encode product type name(index 2 in features)
+X[:, 2] = labelencoder_X_2.fit_transform(X[:, 2])#encoding product type from string to just 2 no.s 0,1(onprem,cloud) respectively
 #Now creating Dummy variables
 onehotencoder = OneHotEncoder(categorical_features = [1])
 X = onehotencoder.fit_transform(X).toarray()
@@ -187,8 +187,8 @@ y = predict_dataset[:, 13]
 
 labelencoder_X_1 = LabelEncoder()#creating label encoder object no. 1 to encode region name(index 1 in features)
 X[:, 1] = labelencoder_X_1.fit_transform(X[:, 1])#encoding region from string to just 3 no.s 0,1,2 respectively
-labelencoder_X_2 = LabelEncoder()#creating label encoder object no. 2 to encode Gender name(index 2 in features)
-X[:, 2] = labelencoder_X_2.fit_transform(X[:, 2])#encoding Gender from string to just 2 no.s 0,1(male,female) respectively
+labelencoder_X_2 = LabelEncoder()#creating label encoder object no. 2 to encode product type name(index 2 in features)
+X[:, 2] = labelencoder_X_2.fit_transform(X[:, 2])#encoding product type from string to just 2 no.s 0,1(onprem,cloud) respectively
 #Now creating Dummy variables
 onehotencoder = OneHotEncoder(categorical_features = [1])
 X = onehotencoder.fit_transform(X).toarray()
