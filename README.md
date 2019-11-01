@@ -18,9 +18,8 @@
 - README.md
 - group1-shard1of1.bin (Keras model is converted to Tensorflow layers so that it could be imported and run on a web browser.)
 
+## To convert the model to a tensorflowjs model (For web development only)
 The command is first 
 `$ pip install tensorflowjs` \
 Then,
-`$ tensorflowjs_converter --input_format keras` \
-                       `path/to/my_model.h5` \
-                       `path/to/tfjs_target_dir`
+`$ tensorflowjs_converter --input_format keras path/to/my_model.h5 path/to/tfjs_target_dir` \
