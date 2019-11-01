@@ -6,7 +6,7 @@
 - Install Git from here: https://gitforwindows.org/ 
 - Install requirements \
 `$ pip install -U -r requirements.txt` 
-- At this point, you have to be able to run the neural network \
+- At this point, you should be able to run the neural network \
 `$ python ann.py`  
 
 ## Included Files ##
